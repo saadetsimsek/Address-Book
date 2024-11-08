@@ -27,6 +27,8 @@ class ViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        viewModel.getUsers()
     }
     
     private func setConstraints(){
