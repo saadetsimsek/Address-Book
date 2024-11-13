@@ -10,7 +10,7 @@ import Foundation
 class AddresViewModel {
     
     var isLoading: Observable<Bool> =  Observable(false)
-    var cellDataSource: Observable<[Users]> = Observable(nil)
+    var cellDataSource: Observable<[TableViewCellViewModel]> = Observable(nil)
     var dataSource: [Users]?
     
     func getUsers(){
@@ -27,6 +27,8 @@ class AddresViewModel {
     }
     
     func mapCellData(){
-        cellDataSource.value = dataSource
+        cellDataSource.value = dataSource?.compactMap({
+            TableViewCellViewModel($0)
+        })
     }
 }
