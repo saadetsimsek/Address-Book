@@ -67,6 +67,12 @@ class ViewController: UIViewController {
        //     self.tableView.reloadData()
         }
     }
+    
+    private func presentDetailViewController(users: Users){
+        let detailViewModel = DetailViewModel(user: users)
+        let vc = DetailsViewController(detailsViewModel: detailViewModel)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
@@ -92,6 +98,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let dataSource = viewModel.dataSource else {return}
+        presentDetailViewController(users: dataSource[indexPath.row])
     }
 }
 
